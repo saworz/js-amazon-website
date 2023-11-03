@@ -1,5 +1,43 @@
+body {
+  margin: 0;
+  height: 3000px;
+}
+
 .header-div {
   position: fixed;
-  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  width: 100%;
   background-color: black;
+}
+
+.amazon-logo {
+  color: white;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.search-bar {
+  color: white;
+}
+
+.header-right-section {
+  color: white;
+  margin-right: 30px;  
+}
+
+.returns-and-orders {
+  color: white;
+}
+
+.cart {
+  color: white;
+}
+
+.amazon-logo {
+  width: 100px;
+  margin-top: 5px;
 }
