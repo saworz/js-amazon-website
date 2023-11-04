@@ -18,6 +18,19 @@ body {
   color: white;
   display: inline-block;
   margin-left: 10px;
+  margin-top: 5px;
+}
+
+.amazon-logo-image:hover,
+.returns-and-orders:hover,
+.cart:hover {
+  border: 1px solid white;
+  border-radius: 2px;
+}
+
+.amazon-logo-image {
+  width: 100px;
+  padding: 10px;
 }
 
 .search-bar {
@@ -26,18 +39,70 @@ body {
 
 .header-right-section {
   color: white;
-  margin-right: 30px;  
+  margin-right: 25px;
+  display: flex;
+  flex-direction: row;
 }
 
 .returns-and-orders {
   color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
 }
 
-.cart {
+.returns-and-orders-link {
+  text-decoration: none;
   color: white;
+  display: flex;
+  flex-direction: column;
 }
 
-.amazon-logo {
-  width: 100px;
-  margin-top: 5px;
+.returns-span {
+  font-size: 13px;
+}
+
+.orders-span {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cart-link {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  color: white;
+  position: relative;
+}
+
+.cart-image {
+  padding-top: 5px;
+  padding-left: 5px;
+  width: 50px;
+}
+
+.cart-span {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+.cart-text {
+  padding-top: 20px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cart-quantity {
+  color: rgb(240, 136, 4);
+  font-size: 16px;
+  font-weight: 700;
+
+  position: absolute;
+  top: 4px;
+  left: 22px;
+  
+  width: 26px;
+  text-align: center;
 }
