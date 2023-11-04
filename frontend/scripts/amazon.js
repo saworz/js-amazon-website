@@ -45,7 +45,7 @@ products.forEach((product) => {
     </div>
   </div>
   <div class="item-price-div">
-    $${product.price_in_cents/100}
+    $${(product.price_in_cents/100).toFixed(2)}
   </div>
   <div class="item-amount-div">
     <select>
