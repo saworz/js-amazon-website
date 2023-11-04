@@ -1,33 +1,3 @@
-const products = [{
-  name: 'Six pieces of non stick baking set for kitchen.',
-  image: 'images/products/6-piece-non-stick-baking-set.webp',
-  rating: {
-    stars: 4.5,
-    count: 125},
-  price_in_cents: 1120
-},{
-  name: 'Very comfy tshirt that will match your shoes.',
-  image: 'images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg',
-  rating: {
-    stars: 4,
-    count: 54},
-  price_in_cents: 160
-},{
-  name: 'Super nice backpack for your next trip.',
-  image: 'images/products/backpack.jpg',
-  rating: {
-    stars: 5,
-    count: 121},
-  price_in_cents: 3200
-},{  
-  name: 'Dark curtains for bedroom.',
-  image: 'images/products/blackout-curtains-black.jpg',
-  rating: {
-  stars: 3.5,
-  count: 21},
-price_in_cents: 6600
-}];
-
 let productsHTML = '';
 
 products.forEach((product) => {
@@ -70,5 +40,4 @@ products.forEach((product) => {
 productsHTML += html;
 });
 
-console.log(productsHTML);
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
