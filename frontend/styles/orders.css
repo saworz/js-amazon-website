@@ -1,0 +1,58 @@
+.main-field {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+}
+
+.orders-field {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+}
+
+.page-title {
+  margin-top: 40px;
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(240, 242, 242);
+  border: 1px solid rgb(213, 217, 217);
+  border-radius: 7px;
+  padding: 20px;
+}
+
+.order-placed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+  margin-right: 40px;
+}
+
+.order-total {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.order-id {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.orders {
+
+}
+
+.order-item {
+
+}
