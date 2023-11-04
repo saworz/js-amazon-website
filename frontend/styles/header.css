@@ -11,6 +11,7 @@ body {
   height: 60px;
   width: 100%;
   background-color: black;
+  z-index: 999;
 }
 
 .amazon-logo {
