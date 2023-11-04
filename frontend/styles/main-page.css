@@ -80,6 +80,7 @@
 .item-description-div {
   height: 40px;
   margin-bottom: 5px;
+  overflow: hidden;
 }
 
 .item-rating-div {
