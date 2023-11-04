@@ -1,0 +1,17 @@
+.main-field {
+  position: absolute;
+  top: 60px;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.item-container {
+
+}
+
+.item-image {
+  height: 180px;
+}
