@@ -3,6 +3,7 @@ import { products } from "../../backend/data/products.js"
 
 let productsHTML = '';
 
+
 products.forEach((product) => {
   const html = `<div class="item-container">
   <div class="item-image-div">
@@ -61,8 +62,5 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 
     addToCart(productId);
     calculateQuantity();
-
-    
-
   });
 });
