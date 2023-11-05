@@ -24,9 +24,9 @@ export function addToCart(productId) {
   };
 }
 
-export function deleteFromCart(button, checkoutItems) {
+export function deleteFromCart(productId, checkoutItems) {
   const newCart = [];
-  const productId = button.dataset.productId;
+
   checkoutItems.forEach((item) => {
     if (item.product.id != productId) {
       newCart.push(item);
