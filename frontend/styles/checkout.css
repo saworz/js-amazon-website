@@ -276,3 +276,12 @@
   margin-top: 11px;
   margin-bottom: 15px;
 }
+
+.link-primary {
+  color: rgb(1, 124, 182);
+  cursor: pointer;
+}
+
+.link-primary:hover {
+  color: rgb(196, 80, 0);
+}
