@@ -11,22 +11,55 @@
     <link rel="stylesheet" href="styles/main-page.css">
     <link rel="stylesheet" href="styles/orders.css">
     <link rel="stylesheet" href="styles/buttons.css">
-    
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous">
-    </script>
-    <script>
-      $(function() {
-        $('#header-div').load('header.html');
-      });
-    </script>
 
     <title>Orders</title>
   </head>
   <body>
-    <div id="header-div"></div>
+    <div class="header-div">
+      <div class="amazon-logo">
+        <a href="main-page.html">
+          <img class="amazon-logo-image" 
+            src="images/amazon-logo-white.png">
+          <img class="amazon-mobile-logo-image"
+            src="images/amazon-mobile-logo-white.png">
+        </a>
+      </div>
+
+      <div class="search-div">
+        <input class="search-bar" type="text" placeholder="Search">
+        <button class="search-button">
+          <img class="search-icon" src="images/icons/search-icon.png">
+        </button>
+      </div>
+
+      <div class="header-right-section">
+        <div class="returns-and-orders">
+          <a class="returns-and-orders-link" href="orders.html">
+            <span class="returns-span">Returns</span>
+            <span class="orders-span">& Orders</span>
+          </a>
+        </div>
+
+        <div class="cart">
+          <a class="cart-link" href="checkout.html">
+            <img class="cart-image"          
+              src="images/icons/cart-icon.png">
+            <div class="cart-text">Cart</div>
+            <div class="cart-quantity js-cart-quantity">0</div>
+          </a>
+        </div>
+
+        <div class="mobile-list">
+          <a class="mobile-list-link" href="#" onclick="toogleDropdown(event)">
+            <img class="hamburger-list"
+              src="images/icons/hamburger-menu.png">
+          </a>
+          <div class="dropdown-content">
+            aaaaa
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="main-field">
       <div class="orders-field">

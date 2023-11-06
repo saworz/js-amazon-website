@@ -3,30 +3,18 @@ import products from "../../backend/data/products.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 const checkoutItems = [];
-
-function getCheckoutItems(productId, quantity) {
-  products.forEach((product) => {
-    if (product.id == productId) {
-      checkoutItems.push({
-        product: product,
-        quantity: quantity
-      });
-    };
-  });
-};
-
 const checkoutItemsHtml = [];
 
-cart.forEach((product) => {
-  getCheckoutItems(product.productId, product.quantity)
-});
+console.log('in checkout')
+console.log(cart);
 
 const today = dayjs();
-console.log(today.format('dddd, D, MMMM'))
+
 
 checkoutItems.forEach((checkoutItem) => {
+
   const html = `<div class="cart-item-container js-cart-item-container-${checkoutItem.product.id}">
-    <div class="delivery-date">
+    <div class="delivery-date js-delivery-date">
       Delivery date: Wednesday, June 15
     </div>
 

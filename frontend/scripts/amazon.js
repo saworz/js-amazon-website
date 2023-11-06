@@ -3,7 +3,6 @@ import { products } from "../../backend/data/products.js"
 
 let productsHTML = '';
 
-
 products.forEach((product) => {
   const html = `<div class="item-container">
   <div class="item-image-div">
@@ -49,6 +48,7 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 function calculateQuantity() {
   let itemsQuantity = 0;
 
+  console.log(cart);
   cart.forEach((item) => {
     itemsQuantity += item.quantity;
   });
@@ -59,8 +59,12 @@ function calculateQuantity() {
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
-
+    console.log("adding to cart")
+    console.log(productId)
     addToCart(productId);
     calculateQuantity();
   });
 });
+
+console.log(cart)
+calculateQuantity();
