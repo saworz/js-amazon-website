@@ -1,5 +1,6 @@
-import { cart, deleteFromCart } from "../../backend/data/cart.js"
-import { products } from "../../backend/data/products.js"
+import { cart, deleteFromCart } from "../../backend/data/cart.js";
+import products from "../../backend/data/products.js";
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 const checkoutItems = [];
 
@@ -19,6 +20,9 @@ const checkoutItemsHtml = [];
 cart.forEach((product) => {
   getCheckoutItems(product.productId, product.quantity)
 });
+
+const today = dayjs();
+console.log(today.format('dddd, D, MMMM'))
 
 checkoutItems.forEach((checkoutItem) => {
   const html = `<div class="cart-item-container js-cart-item-container-${checkoutItem.product.id}">
@@ -60,7 +64,7 @@ checkoutItems.forEach((checkoutItem) => {
             name="delivery-option-${checkoutItem.product.id}">
           <div>
             <div class="delivery-option-date">
-              Tuesday, June 21
+              ${today.add(7, 'days').format('dddd, D, MMMM')}
             </div>
             <div class="delivery-option-price">
               FREE Shipping
@@ -72,7 +76,7 @@ checkoutItems.forEach((checkoutItem) => {
             name="delivery-option-${checkoutItem.product.id}">
           <div>
             <div class="delivery-option-date">
-              Wednesday, June 15
+            ${today.add(3, 'days').format('dddd, D, MMMM')}
             </div>
             <div class="delivery-option-price">
               $4.99 - Shipping
@@ -84,7 +88,7 @@ checkoutItems.forEach((checkoutItem) => {
             name="delivery-option-${checkoutItem.product.id}">
           <div>
             <div class="delivery-option-date">
-              Monday, June 13
+            ${today.add(1, 'days').format('dddd, D, MMMM')}
             </div>
             <div class="delivery-option-price">
               $9.99 - Shipping
