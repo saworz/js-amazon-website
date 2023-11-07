@@ -5,38 +5,34 @@ import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 const checkoutItems = [];
 const checkoutItemsHtml = [];
 
-console.log('in checkout')
-console.log(cart);
-
 const today = dayjs();
 
+cart.forEach((item) => {
 
-checkoutItems.forEach((checkoutItem) => {
-
-  const html = `<div class="cart-item-container js-cart-item-container-${checkoutItem.product.id}">
+  const html = `<div class="cart-item-container js-cart-item-container-${item.product.id}">
     <div class="delivery-date js-delivery-date">
       Delivery date: Wednesday, June 15
     </div>
 
     <div class="cart-item-details-grid">
       <img class="product-image"
-        src="${checkoutItem.product.image}">
+        src="${item.product.image}">
 
       <div class="cart-item-details">
         <div class="product-name">
-          ${checkoutItem.product.name}
+          ${item.product.name}
         </div>
         <div class="product-price">
-          $${(checkoutItem.product.priceCents/100).toFixed(2)}
+          $${(item.product.priceCents/100).toFixed(2)}
         </div>
         <div class="product-quantity">
           <span>
-            Quantity: <span class="quantity-label">${checkoutItem.quantity}</span>
+            Quantity: <span class="quantity-label">${item.quantity}</span>
           </span>
           <span class="update-quantity-link link-primary">
             Update
           </span>
-          <span class="delete-quantity-link link-primary js-delete-item" data-product-id=${checkoutItem.product.id}>
+          <span class="delete-quantity-link link-primary js-delete-item" data-product-id=${item.product.id}>
             Delete
           </span>
         </div>
@@ -49,7 +45,7 @@ checkoutItems.forEach((checkoutItem) => {
 
         <div class="delivery-option">
           <input type="radio" class="delivery-option-input"
-            name="delivery-option-${checkoutItem.product.id}">
+            name="delivery-option-${item.product.id}">
           <div>
             <div class="delivery-option-date">
               ${today.add(7, 'days').format('dddd, D, MMMM')}
@@ -61,7 +57,7 @@ checkoutItems.forEach((checkoutItem) => {
         </div>
         <div class="delivery-option">
           <input type="radio" checked class="delivery-option-input"
-            name="delivery-option-${checkoutItem.product.id}">
+            name="delivery-option-${item.product.id}">
           <div>
             <div class="delivery-option-date">
             ${today.add(3, 'days').format('dddd, D, MMMM')}
@@ -73,7 +69,7 @@ checkoutItems.forEach((checkoutItem) => {
         </div>
         <div class="delivery-option">
           <input type="radio" class="delivery-option-input"
-            name="delivery-option-${checkoutItem.product.id}">
+            name="delivery-option-${item.product.id}">
           <div>
             <div class="delivery-option-date">
             ${today.add(1, 'days').format('dddd, D, MMMM')}
@@ -91,6 +87,18 @@ checkoutItems.forEach((checkoutItem) => {
 });
 
 document.querySelector('.js-order-summary').innerHTML = checkoutItemsHtml;
+
+function calculateQuantity() {
+  let itemsQuantity = 0;
+
+  cart.forEach((item) => {
+    itemsQuantity += item.quantity;
+  });
+
+  document.querySelector('.js-cart-quantity').innerHTML = `          Checkout (<a class='return-to-home-link' href='main-page.html'>${itemsQuantity} items</a>)`;
+};
+
+calculateQuantity();
 
 document.querySelectorAll('.js-delete-item').
 forEach((button) => {
