@@ -37,12 +37,13 @@ export function addToCart(productId) {
   saveToStorage();
 };
 
-export function deleteFromCart(productId, checkoutItems) {
+export function deleteFromCart(deleteId) {
   const newCart = [];
 
-  checkoutItems.forEach((item) => {
-    if (item.product.id != productId) {
-      newCart.push(item);
+  cart.forEach((product) => {
+
+    if(product.product.id != deleteId) {
+      newCart.push(product);
     };
   });
 
