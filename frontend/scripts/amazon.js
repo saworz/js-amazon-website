@@ -20,7 +20,7 @@ products.forEach((product) => {
   <div class="item-price-div">
     $${(product.priceCents/100).toFixed(2)}
   </div>
-  <div class="item-amount-div">
+  <div class="item-amount-div js-selected-amount-${product.id}">
     <select>
       <option selected value="1">1</option>
       <option value="2">2</option>
@@ -59,12 +59,14 @@ function calculateQuantity() {
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
-    console.log("adding to cart")
-    console.log(productId)
-    addToCart(productId);
+    const listValue = document.querySelector(`.js-selected-amount-${productId} select`).value
+
+    for (let i=0; i < listValue; i++) {
+      addToCart(productId);
+    };
+
     calculateQuantity();
   });
 });
 
-console.log(cart)
 calculateQuantity();
