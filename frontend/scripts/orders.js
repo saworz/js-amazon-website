@@ -1,4 +1,4 @@
-import orders from "../../backend/data/orders.js";
+import orders from "../../backend/data/ordersList.js";
 
 let ordersHtml = '';
 
