@@ -88,8 +88,10 @@ cart.forEach((item) => {
 
 document.querySelector('.js-order-summary').innerHTML = checkoutItemsHtml.join("");
 
+let itemsQuantity = 0;
+
 function calculateQuantity() {
-  let itemsQuantity = 0;
+  itemsQuantity = 0;
 
   cart.forEach((item) => {
     itemsQuantity += item.quantity;
@@ -109,5 +111,88 @@ forEach((button) => {
     const itemContainer = document.querySelector(`.js-cart-item-container-${productId}`);
     itemContainer.remove();
     calculateQuantity();
+    summarizeOrderCost();
   });
 });
+
+function createOrderSummary(totalDeliveryPriceCents, totalItemsPriceCents) {
+  const beforeTaxCents = totalDeliveryPriceCents + totalItemsPriceCents;
+  const taxValue = 0.1;
+  const taxPrice = beforeTaxCents * taxValue;
+  const orderTotal = beforeTaxCents + taxPrice;
+  const html = `          
+  <div class="payment-summary-title">
+    Order Summary
+  </div>
+
+  <div class="payment-summary-row">
+    <div>Items (${itemsQuantity}):</div>
+    <div class="payment-summary-money">$${(totalItemsPriceCents/100).toFixed(2)}</div>
+  </div>
+
+  <div class="payment-summary-row">
+    <div>Shipping &amp; handling:</div>
+    <div class="payment-summary-money">$${(totalDeliveryPriceCents/100).toFixed(2)}</div>
+  </div>
+
+  <div class="payment-summary-row subtotal-row">
+    <div>Total before tax:</div>
+    <div class="payment-summary-money">$${(beforeTaxCents/100).toFixed(2)}</div>
+  </div>
+
+  <div class="payment-summary-row">
+    <div>Estimated tax (10%):</div>
+    <div class="payment-summary-money">$${(taxPrice/100).toFixed(2)}</div>
+  </div>
+
+  <div class="payment-summary-row total-row">
+    <div>Order total:</div>
+    <div class="payment-summary-money">$${(orderTotal/100).toFixed(2)}</div>
+  </div>
+
+  <button class="place-order-button button-primary">
+    Place your order
+  </button>`
+
+  document.querySelector('.js-payment-summary').innerHTML = html
+};
+
+function summarizeOrderCost() {
+  
+  let totalDeliveryPriceCents = 0;
+  let totalItemsPriceCents = 0;
+
+  cart.forEach((item) => {
+    const deliveryOptions = document.querySelectorAll('input[name="delivery-option-' + item.product.id + '"]');
+
+    for (let i=0; i<item.quantity; i++) {
+      totalItemsPriceCents += item.product.priceCents;
+    };
+
+    for(let i=0; i<deliveryOptions.length; i++) {
+      if (deliveryOptions[i].checked) {
+        if (i === 1) {
+          totalDeliveryPriceCents += 499;
+        } else if (i === 2) {
+          totalDeliveryPriceCents += 999;
+        };
+      };
+    };
+  });
+
+  createOrderSummary(totalDeliveryPriceCents, totalItemsPriceCents);
+};
+
+cart.forEach((item) => {
+  const deliveryOptions = document.querySelectorAll('input[name="delivery-option-' + item.product.id + '"]');
+
+  deliveryOptions.forEach((option) => {
+    option.addEventListener('change', () => {
+      console.log("changed option")
+      summarizeOrderCost();
+    });
+  });
+
+});
+
+summarizeOrderCost();
