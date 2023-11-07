@@ -31,11 +31,9 @@ orders.forEach((order) => {
       </div>
     </div>
     <div class="product-actions">
-      <a href="tracking.html">
-        <button class="track-package-button button-secondary">
+        <button class="track-package-button button-secondary js-track-button-${order.id}">
           Track package
         </button>
-      </a>
     </div>
   </div>`;
 
@@ -43,3 +41,11 @@ orders.forEach((order) => {
 });
 
 document.querySelector('.js-orders').innerHTML = ordersHtml;
+
+orders.forEach((order) => {
+  const trackButton = document.querySelector(`.js-track-button-${order.id}`);
+  trackButton.addEventListener('click', () => {
+    const trackingUrl = "tracking.html?itemId=" + order.id;
+    window.location.href = trackingUrl;
+  });
+});
