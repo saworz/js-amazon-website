@@ -13,10 +13,10 @@ orders.forEach((order) => {
         ${order.name}
       </div>
       <div class="description-arrival">
-        Arriving on: November 9
+        Arriving on: ${order.arrival}
       </div>
       <div class="description-quantity">
-        Quantity: 2
+        Quantity: ${order.quantity}
       </div>
       <button class="buy-again-button button-primary">
         <img class="buy-again-icon" src="images/icons/buy-again.png">

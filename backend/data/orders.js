@@ -14,6 +14,8 @@ export let orders = [{
     "womens",
     "apparel"
   ],
+  quantity: 2,
+  arrival: 'November 9'
 },
 {
   id: "a93a101d-79ef-4cf3-a6cf-6dbe532a1b4a",
@@ -28,7 +30,9 @@ export let orders = [{
     "bathmat",
     "bathroom",
     "home"
-  ]
+  ],
+  quantity: 1,
+  arrival: 'November 16'
 }];
 
 export default orders;
