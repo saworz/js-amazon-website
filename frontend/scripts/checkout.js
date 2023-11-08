@@ -1,5 +1,7 @@
 import { cart, deleteFromCart } from "../../backend/data/cart.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
+import setFavicon from "./favicon.js";
+
 
 const today = dayjs();
 
@@ -215,7 +217,7 @@ function handleDeliveryChange() {
     
     deliveryOptions.forEach((option, index) => {
       setDeliveryDate(item.product.id, 1);
-      
+
       option.addEventListener('change', () => {
         summarizeOrderCost();
         setDeliveryDate(item.product.id, index);
@@ -226,6 +228,7 @@ function handleDeliveryChange() {
 };
 
 
+setFavicon();
 drawCheckoutItems();
 handleDeleteButton();
 handleDeliveryChange();

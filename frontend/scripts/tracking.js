@@ -1,4 +1,6 @@
 import orders from "../../backend/data/ordersList.js"
+import setFavicon from "./favicon.js";
+
 
 function drawOrders() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -51,4 +53,5 @@ function drawOrders() {
   document.querySelector('.js-tracking').innerHTML = html;
 };
 
+setFavicon();
 drawOrders();

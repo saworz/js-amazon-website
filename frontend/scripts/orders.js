@@ -1,5 +1,7 @@
 import orders from "../../backend/data/ordersList.js";
 import { addToCart, calculateQuantity } from "../../backend/data/cart.js";
+import setFavicon from "./favicon.js";
+
 
 function drawOrders() {
   let ordersHtml = '';
@@ -65,6 +67,7 @@ function moveToTracking() {
 };
 
 
+setFavicon();
 drawOrders();
 buyAgainButton();
 moveToTracking();

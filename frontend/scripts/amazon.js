@@ -1,5 +1,6 @@
 import { addToCart, calculateQuantity } from "../../backend/data/cart.js";
 import { products } from "../../backend/data/products.js"
+import setFavicon from "./favicon.js";
 
 
 function drawItems() {
@@ -61,7 +62,7 @@ function handleAddButton() {
   });
 };
 
-
+setFavicon();
 drawItems();
 handleAddButton();
 calculateQuantity();
