@@ -285,3 +285,13 @@
 .link-primary:hover {
   color: rgb(196, 80, 0);
 }
+
+.back-to-store-button {
+  display: block;
+  width: 150px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+
+  margin-top: 15px;
+}
