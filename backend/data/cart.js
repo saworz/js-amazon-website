@@ -35,6 +35,7 @@ export function addToCart(productId) {
     });
   };
   saveToStorage();
+  calculateQuantity();
 };
 
 export function deleteFromCart(deleteId) {
@@ -50,3 +51,13 @@ export function deleteFromCart(deleteId) {
   cart = newCart;
   saveToStorage();
 };
+
+export function calculateQuantity() {
+  let itemsQuantity = 0;
+
+  cart.forEach((item) => {
+    itemsQuantity += item.quantity;
+  });
+
+  document.querySelector('.js-cart-quantity').innerHTML = itemsQuantity;
+}

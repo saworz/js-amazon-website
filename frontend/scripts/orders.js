@@ -1,4 +1,5 @@
 import orders from "../../backend/data/ordersList.js";
+import { addToCart, calculateQuantity } from "../../backend/data/cart.js";
 
 function drawOrders() {
   let ordersHtml = '';
@@ -19,7 +20,7 @@ function drawOrders() {
         <div class="description-quantity">
           Quantity: ${order.quantity}
         </div>
-        <button class="buy-again-button button-primary">
+        <button class="buy-again-button button-primary js-buy-again" data-product-id="${order.id}">
           <img class="buy-again-icon" src="images/icons/buy-again.png">
           <span class="buy-again-message">Buy it again</span>
         </button>
@@ -44,6 +45,15 @@ function drawOrders() {
 };
 
 
+function buyAgainButton() {
+  document.querySelectorAll('.js-buy-again').forEach((button) => {
+    button.addEventListener('click', () => {
+      addToCart(button.dataset.productId);
+    });
+  });
+};
+
+
 function moveToTracking() {
   orders.forEach((order) => {
     const trackButton = document.querySelector(`.js-track-button-${order.id}`);
@@ -56,4 +66,6 @@ function moveToTracking() {
 
 
 drawOrders();
+buyAgainButton();
 moveToTracking();
+calculateQuantity();

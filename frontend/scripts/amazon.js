@@ -49,7 +49,7 @@ function drawItems() {
 };
 
 
-function calculateQuantity() {
+export function calculateQuantity() {
   let itemsQuantity = 0;
 
   cart.forEach((item) => {
@@ -69,8 +69,6 @@ function handleAddButton() {
       for (let i=0; i < listValue; i++) {
         addToCart(productId);
       };
-  
-      calculateQuantity();
     });
   });
 };
