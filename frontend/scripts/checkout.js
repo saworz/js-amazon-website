@@ -8,7 +8,7 @@ function drawCheckoutItems() {
   cart.forEach((item) => {
 
     const html = `<div class="cart-item-container js-cart-item-container-${item.product.id}">
-      <div class="delivery-date js-delivery-date">
+      <div class="delivery-date js-delivery-date" data-product-id=${item.product.id}>
         Delivery date: Wednesday, June 15
       </div>
   
@@ -100,6 +100,7 @@ function calculateQuantity() {
   document.querySelector('.js-cart-quantity').innerHTML = `          Checkout (<a class='return-to-home-link' href='main-page.html'>${itemsQuantity} items</a>)`;
 };
 
+
 function handleDeleteButton() {
   document.querySelectorAll('.js-delete-item').
   forEach((button) => {
@@ -158,6 +159,7 @@ function createOrderSummary(totalDeliveryPriceCents, totalItemsPriceCents) {
   document.querySelector('.js-payment-summary').innerHTML = html
 };
 
+
 function summarizeOrderCost() {
   
   let totalDeliveryPriceCents = 0;
@@ -184,14 +186,39 @@ function summarizeOrderCost() {
   createOrderSummary(totalDeliveryPriceCents, totalItemsPriceCents);
 };
 
+
+function setDeliveryDate(productId, optionIndex) {
+  const deliveryDate = document.querySelectorAll('.js-delivery-date');
+  deliveryDate.forEach((date) => {
+    if (date.dataset.productId === productId) {
+      let delivery;
+
+      if (optionIndex === 0) {
+        delivery = today.add(7, 'days').format('dddd, MMMM D')
+      }
+      else if (optionIndex === 1) {
+        delivery = today.add(3, 'days').format('dddd, D, MMMM')
+      }
+      else if (optionIndex === 2) {
+        delivery = today.add(1, 'days').format('dddd, D, MMMM')
+      };
+
+      date.innerHTML = `Delivery date: ${delivery}`;
+    };
+  });
+};
+
+
 function handleDeliveryChange() {
   cart.forEach((item) => {
     const deliveryOptions = document.querySelectorAll('input[name="delivery-option-' + item.product.id + '"]');
-  
-    deliveryOptions.forEach((option) => {
+    
+    deliveryOptions.forEach((option, index) => {
+      setDeliveryDate(item.product.id, 1);
+      
       option.addEventListener('change', () => {
-        console.log("changed option")
         summarizeOrderCost();
+        setDeliveryDate(item.product.id, index);
       });
     });
   

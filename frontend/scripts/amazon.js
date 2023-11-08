@@ -1,4 +1,4 @@
-import { cart, addToCart } from "../../backend/data/cart.js";
+import { addToCart, calculateQuantity } from "../../backend/data/cart.js";
 import { products } from "../../backend/data/products.js"
 
 
@@ -47,18 +47,6 @@ function drawItems() {
   
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
 };
-
-
-export function calculateQuantity() {
-  let itemsQuantity = 0;
-
-  cart.forEach((item) => {
-    itemsQuantity += item.quantity;
-  });
-
-  document.querySelector('.js-cart-quantity').innerHTML = itemsQuantity;
-}
-
 
 function handleAddButton() {
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
