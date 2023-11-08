@@ -128,6 +128,10 @@ function handleDeleteButton() {
       itemContainer.remove();
       calculateQuantity();
       summarizeOrderCost();
+
+      if (cart.length === 0) {
+        drawCheckoutItems();
+      };
     });
   });
 };
