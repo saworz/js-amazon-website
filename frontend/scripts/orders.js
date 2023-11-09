@@ -3,7 +3,7 @@ import { addToCart, calculateQuantity } from "../../backend/data/cart.js";
 import setFavicon from "./favicon.js";
 
 
-function drawOrders() {
+const drawOrders = () => {
   let ordersHtml = '';
 
   orders.forEach((order) => {
@@ -47,7 +47,7 @@ function drawOrders() {
 };
 
 
-function buyAgainButton() {
+const buyAgainButton = () => {
   document.querySelectorAll('.js-buy-again').forEach((button) => {
     button.addEventListener('click', () => {
       addToCart(button.dataset.productId);
@@ -56,7 +56,7 @@ function buyAgainButton() {
 };
 
 
-function moveToTracking() {
+const moveToTracking = () => {
   orders.forEach((order) => {
     const trackButton = document.querySelector(`.js-track-button-${order.id}`);
     trackButton.addEventListener('click', () => {

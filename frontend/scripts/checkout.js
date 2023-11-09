@@ -5,7 +5,7 @@ import setFavicon from "./favicon.js";
 
 const today = dayjs();
 
-function drawCheckoutItems() {
+const drawCheckoutItems = () => {
   const checkoutItemsHtml = [];
   if (cart.length === 0) {
     const html = `
@@ -106,7 +106,7 @@ function drawCheckoutItems() {
 
 let itemsQuantity = 0;
 
-function calculateQuantity() {
+const calculateQuantity = () => {
   itemsQuantity = 0;
 
   cart.forEach((item) => {
@@ -117,7 +117,7 @@ function calculateQuantity() {
 };
 
 
-function handleDeleteButton() {
+const handleDeleteButton = () => {
   document.querySelectorAll('.js-delete-item').
   forEach((button) => {
     button.addEventListener('click', () => {
@@ -137,7 +137,7 @@ function handleDeleteButton() {
 };
 
 
-function createOrderSummary(totalDeliveryPriceCents, totalItemsPriceCents) {
+const createOrderSummary = (totalDeliveryPriceCents, totalItemsPriceCents) => {
   const beforeTaxCents = totalDeliveryPriceCents + totalItemsPriceCents;
   const taxValue = 0.1;
   const taxPrice = beforeTaxCents * taxValue;
@@ -180,7 +180,7 @@ function createOrderSummary(totalDeliveryPriceCents, totalItemsPriceCents) {
 };
 
 
-function summarizeOrderCost() {
+const summarizeOrderCost = () => {
   
   let totalDeliveryPriceCents = 0;
   let totalItemsPriceCents = 0;
@@ -207,7 +207,7 @@ function summarizeOrderCost() {
 };
 
 
-function setDeliveryDate(productId, optionIndex) {
+const setDeliveryDate = (productId, optionIndex) => {
   const deliveryDate = document.querySelectorAll('.js-delivery-date');
   deliveryDate.forEach((date) => {
     if (date.dataset.productId === productId) {
@@ -229,7 +229,7 @@ function setDeliveryDate(productId, optionIndex) {
 };
 
 
-function handleDeliveryChange() {
+const handleDeliveryChange = () => {
   cart.forEach((item) => {
     const deliveryOptions = document.querySelectorAll('input[name="delivery-option-' + item.product.id + '"]');
     

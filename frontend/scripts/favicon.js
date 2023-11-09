@@ -1,4 +1,4 @@
-export function setFavicon(){
+export const setFavicon = () => {
   let headTitle = document.querySelector('head');
   let setFavicon = document.createElement('link');
   setFavicon.setAttribute('rel','shortcut icon');

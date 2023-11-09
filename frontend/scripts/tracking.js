@@ -2,7 +2,7 @@ import orders from "../../backend/data/ordersList.js"
 import setFavicon from "./favicon.js";
 
 
-function drawOrders() {
+const drawOrders = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const itemId = urlParams.get('itemId');
   let item;

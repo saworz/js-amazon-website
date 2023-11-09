@@ -3,7 +3,7 @@ import { products } from "../../backend/data/products.js"
 import setFavicon from "./favicon.js";
 
 
-function drawItems() {
+const drawItems = () => {
   let productsHTML = '';
 
   products.forEach((product) => {
@@ -49,7 +49,7 @@ function drawItems() {
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
 };
 
-function handleAddButton() {
+const handleAddButton = () => {
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
       const productId = button.dataset.productId;
