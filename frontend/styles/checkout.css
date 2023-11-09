@@ -194,8 +194,12 @@
   margin-bottom: 5px;
 }
 
+.product-quantity {
+  display: flex;
+}
+
 .product-quantity .link-primary {
-  margin-left: 3px;
+  margin-left: 5px;
 }
 
 @media (max-width: 1000px) {

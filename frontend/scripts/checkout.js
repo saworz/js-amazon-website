@@ -1,4 +1,4 @@
-import { cart, deleteFromCart } from "../../backend/data/cart.js";
+import { cart, deleteFromCart, saveToStorage } from "../../backend/data/cart.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import setFavicon from "./favicon.js";
 
@@ -38,10 +38,13 @@ const drawCheckoutItems = () => {
               $${(item.product.priceCents/100).toFixed(2)}
             </div>
             <div class="product-quantity">
-              <span>
-                Quantity: <span class="quantity-label">${item.quantity}</span>
-              </span>
-              <span class="update-quantity-link link-primary">
+              <div class="product-display-quantity js-display-quantity-${item.product.id}">
+                <span>
+                  Quantity: <span class="quantity-label">${item.quantity}</span>
+                </span>
+              </div>
+
+              <span class="update-quantity-link link-primary js-update-quantity" data-product-id=${item.product.id}>
                 Update
               </span>
               <span class="delete-quantity-link link-primary js-delete-item" data-product-id=${item.product.id}>
@@ -246,8 +249,57 @@ const handleDeliveryChange = () => {
 };
 
 
+const updateCart = (productId, newQuantity) => {
+  const productIndex = cart.findIndex(item => item.product.id === productId);
+  cart[productIndex].quantity = newQuantity;
+  saveToStorage();
+};
+
+
+const displayQuantityList = (productId) => {
+  const listElement =     
+  `Quantity: 
+  <select id="js-dropdown-list-${productId}" class="hidden">
+    <option value=""></option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>`
+  document.querySelector(`.js-display-quantity-${productId}`).innerHTML = listElement;
+
+  const dropdownList = document.getElementById(`js-dropdown-list-${productId}`);
+  dropdownList.addEventListener('change', () => {
+    const selectedOption = dropdownList.options[dropdownList.selectedIndex];
+    const selectedValue = Number(selectedOption.value);
+    updateCart(productId, selectedValue);
+    drawCheckoutItems();
+    updateQuantityInCart();
+    handleDeleteButton();
+    handleDeliveryChange();
+    calculateQuantity();
+    summarizeOrderCost();
+  });
+};
+
+
+const updateQuantityInCart = () => {
+  document.querySelectorAll('.js-update-quantity').forEach((button) => {
+    button.addEventListener('click', () => {
+      displayQuantityList(button.dataset.productId);
+    });
+  });
+};
+
 setFavicon();
 drawCheckoutItems();
+updateQuantityInCart();
 handleDeleteButton();
 handleDeliveryChange();
 calculateQuantity();

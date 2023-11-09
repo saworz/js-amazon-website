@@ -5,7 +5,7 @@ if (!cart) {
   cart = [];
 };
 
-function saveToStorage() {
+export function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 };
 
