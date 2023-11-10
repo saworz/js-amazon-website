@@ -4,46 +4,64 @@ import setFavicon from "./favicon.js";
 
 
 const drawOrders = () => {
-  let ordersHtml = '';
+  let productsHtml = '';
 
   orders.forEach((order) => {
-    const html = `          
-    <div class="order-item">
-      <div class="order-image-div">
-        <img class="order-image" src=${order.image}>
-      </div>
-      <div class="order-description">
-        <div class="description-title">
-          ${order.name}
+    const orderInfoHtml = `
+    <div class="order-placed">
+      <span class="order-upper-text">Order placed:</span>
+      <div class="order-lower-text">${order.order_placed}</div>
+    </div>
+    <div class="order-total">
+      <span class="order-upper-text">Total:</span>
+      <div class="order-lower-text">$${(order.total_price_cents/100).toFixed(2)}</div>
+    </div>
+    <div class="order-id">
+      <span class="order-upper-text">Order ID:</span>
+      <div class="order-lower-text">${order.order_id}</div>
+    </div>
+    `
+    document.querySelector('.js-order-info').innerHTML = orderInfoHtml;
+
+    order.products.forEach((product) => {
+      const productsSingleHtml = `          
+      <div class="order-item">
+        <div class="order-image-div">
+          <img class="order-image" src=${product.image}>
         </div>
-        <div class="description-arrival">
-          Arriving on: ${order.arrival}
+        <div class="order-description">
+          <div class="description-title">
+            ${product.name}
+          </div>
+          <div class="description-arrival">
+            Arriving on: ${product.arrival}
+          </div>
+          <div class="description-quantity">
+            Quantity: ${product.quantity}
+          </div>
+          <button class="buy-again-button button-primary js-buy-again" data-product-id="${product.id}">
+            <img class="buy-again-icon" src="images/icons/buy-again.png">
+            <span class="buy-again-message">Buy it again</span>
+          </button>
+          <div class="product-actions-mobile">
+            <a href="tracking.html">
+              <button class="track-package-button button-secondary">
+                Track package
+              </button>
+            </a>
+          </div>
         </div>
-        <div class="description-quantity">
-          Quantity: ${order.quantity}
-        </div>
-        <button class="buy-again-button button-primary js-buy-again" data-product-id="${order.id}">
-          <img class="buy-again-icon" src="images/icons/buy-again.png">
-          <span class="buy-again-message">Buy it again</span>
-        </button>
-        <div class="product-actions-mobile">
-          <a href="tracking.html">
-            <button class="track-package-button button-secondary">
+        <div class="product-actions">
+            <button class="track-package-button button-secondary js-track-button-${product.id}">
               Track package
             </button>
-          </a>
         </div>
-      </div>
-      <div class="product-actions">
-          <button class="track-package-button button-secondary js-track-button-${order.id}">
-            Track package
-          </button>
-      </div>
-    </div>`;
-  
-    ordersHtml += html;
-  });
-  document.querySelector('.js-orders').innerHTML = ordersHtml;
+      </div>`;
+    
+      productsHtml += productsSingleHtml;
+    });
+    document.querySelector('.js-products').innerHTML = productsHtml;
+    });
 };
 
 
