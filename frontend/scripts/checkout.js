@@ -1,4 +1,4 @@
-import { cart, deleteFromCart, saveToStorage } from "../../backend/data/cart.js";
+  import { cart, deleteFromCart, saveToStorage } from "../../backend/data/cart.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import setFavicon from "./favicon.js";
 
@@ -175,7 +175,7 @@ const createOrderSummary = (totalDeliveryPriceCents, totalItemsPriceCents) => {
     <div class="payment-summary-money">$${(orderTotal/100).toFixed(2)}</div>
   </div>
 
-  <button class="place-order-button button-primary">
+  <button class="place-order-button button-primary js-place-order">
     Place your order
   </button>`
 
@@ -297,6 +297,13 @@ const updateQuantityInCart = () => {
   });
 };
 
+
+const placeOrder = () => {
+  document.querySelector('.js-place-order').addEventListener('click', () => {
+    console.log('clicked')
+  });
+};
+
 setFavicon();
 drawCheckoutItems();
 updateQuantityInCart();
@@ -304,3 +311,4 @@ handleDeleteButton();
 handleDeliveryChange();
 calculateQuantity();
 summarizeOrderCost();
+placeOrder();
