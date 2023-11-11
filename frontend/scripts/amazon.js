@@ -1,5 +1,6 @@
-import { addToCart, calculateQuantity } from "../../backend/data/cart.js";
-import { products } from "../../backend/data/products.js"
+import { addToCart, getCartQuantity, setMainPageCartQuantity } from "../../backend/data/cart.js";
+import products from "../../backend/data/products.js";
+import convertCentsToDollars from "../../backend/utils/priceConverting.js";
 import setFavicon from "./favicon.js";
 
 
@@ -21,7 +22,7 @@ const drawItems = () => {
       </div>
     </div>
     <div class="item-price-div">
-      $${(product.priceCents/100).toFixed(2)}
+      $${convertCentsToDollars(product.priceCents)}
     </div>
     <div class="item-amount-div js-selected-amount-${product.id}">
       <select>
@@ -65,4 +66,4 @@ const handleAddButton = () => {
 setFavicon();
 drawItems();
 handleAddButton();
-calculateQuantity();
+setMainPageCartQuantity();

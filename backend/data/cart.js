@@ -1,13 +1,31 @@
 export let cart = JSON.parse(localStorage.getItem('cart'));
 import { products } from "../../backend/data/products.js"
 
+
 if (!cart) {
   cart = [];
 };
 
-export const saveToStorage = () => {
+export const saveCartToStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cart));
 };
+
+
+export const getCartQuantity = () => {
+  let itemsQuantity = 0;
+
+  cart.forEach((item) => {
+    itemsQuantity += item.quantity;
+  });
+
+  return itemsQuantity;
+};
+
+export const clearCart = () => {
+  cart = [];
+  saveCartToStorage();
+};
+
 
 export const addToCart = (productId) => {
   let matchingItem;
@@ -34,8 +52,8 @@ export const addToCart = (productId) => {
       quantity: 1
     });
   };
-  saveToStorage();
-  calculateQuantity();
+  saveCartToStorage();
+  setMainPageCartQuantity();
 };
 
 export const deleteFromCart = (deleteId) => {
@@ -49,20 +67,15 @@ export const deleteFromCart = (deleteId) => {
   });
 
   cart = newCart;
-  saveToStorage();
+  saveCartToStorage();
+  setMainPageCartQuantity();
 };
 
-export const calculateQuantity = () => {
-  let itemsQuantity = 0;
-
-  cart.forEach((item) => {
-    itemsQuantity += item.quantity;
-  });
-
-  document.querySelector('.js-cart-quantity').innerHTML = itemsQuantity;
+export const setMainPageCartQuantity = () => {
+  document.querySelector('.js-cart-quantity').innerHTML = getCartQuantity();
 };
 
-export const clearCart = () => {
-  cart = [];
-  saveToStorage();
+export const setCheckoutCartQuantity = () => {
+  const html = `Checkout (<a class='return-to-home-link' href='main-page.html'>${getCartQuantity()} items</a>)`;
+  document.querySelector('.js-cart-quantity').innerHTML = html;
 };
