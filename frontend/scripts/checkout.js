@@ -1,18 +1,16 @@
-import { cart, deleteFromCart, saveCartToStorage, clearCart, getCartQuantity, setCheckoutCartQuantity } from "../../backend/data/cart.js";
+import { cart, deleteFromCart, updateCart, clearCart, getCartQuantity, setCheckoutCartQuantity } from "../../backend/data/cart.js";
 import { orders, addToOrders, saveOrdersToStorage } from "../../backend/data/ordersList.js"
 import convertCentsToDollars from "../../backend/utils/priceConverting.js";
 import deliveryOptions from "../../backend/data/deliveryOptions.js";
-import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
+import { addDays, getTodayDate } from "../../backend/utils/formatDate.js";
 import setFavicon from "./favicon.js";
 
-
-const today = dayjs();
 
 const emptyCartInfo = () => {
   const html = `
   <div class="cart-item-container">
     Your cart is empty.
-    <button class="back-to-store-button button-primary">
+    <button onclick="location.href = 'main-page.html'", class="back-to-store-button button-primary">
       Go back to store
     </button>
   </div>`
@@ -64,7 +62,7 @@ const singleCheckoutItemHtml = (item) => {
             name="delivery-option-${item.product.id}">
           <div>
             <div class="delivery-option-date">
-              ${today.add(7, 'days').format('dddd, D, MMMM')}
+              ${addDays(7)}
             </div>
             <div class="delivery-option-price">
               FREE Shipping
@@ -76,7 +74,7 @@ const singleCheckoutItemHtml = (item) => {
             name="delivery-option-${item.product.id}">
           <div>
             <div class="delivery-option-date">
-            ${today.add(3, 'days').format('dddd, D, MMMM')}
+            ${addDays(3)}
             </div>
             <div class="delivery-option-price">
               $4.99 - Shipping
@@ -88,7 +86,7 @@ const singleCheckoutItemHtml = (item) => {
             name="delivery-option-${item.product.id}">
           <div>
             <div class="delivery-option-date">
-            ${today.add(1, 'days').format('dddd, D, MMMM')}
+            ${addDays(1)}
             </div>
             <div class="delivery-option-price">
               $9.99 - Shipping
@@ -221,19 +219,15 @@ const getDeliveryDays = (optionIndex) => {
 const setDeliveryDate = (productId, optionIndex) => {
   document.querySelectorAll('.js-delivery-date').forEach((date) => {
     if (date.dataset.productId === productId) {
-      const delivery = getDeliveryDays(optionIndex);
-
-      date.innerHTML = `Delivery date: ${delivery}`;
+      const deliveryDays = getDeliveryDays(optionIndex);
+      date.innerHTML = `Delivery date: ${addDays(deliveryDays)}`;
     };
   });
 };
 
-
 const handleDeliveryChange = () => {
   cart.forEach((item) => {
-    const deliveryOptions = document.querySelectorAll('input[name="delivery-option-' + item.product.id + '"]');
-    
-    deliveryOptions.forEach((option, index) => {
+    document.querySelectorAll('input[name="delivery-option-' + item.product.id + '"]').forEach((option, index) => {
       setDeliveryDate(item.product.id, 1);
 
       option.addEventListener('change', () => {
@@ -241,17 +235,8 @@ const handleDeliveryChange = () => {
         createOrderSummary();
       });
     });
-  
   });
 };
-
-
-const updateCart = (productId, newQuantity) => {
-  const productIndex = cart.findIndex(item => item.product.id === productId);
-  cart[productIndex].quantity = newQuantity;
-  saveCartToStorage();
-};
-
 
 const displayQuantityList = (productId) => {
   const listElement =     
@@ -276,12 +261,10 @@ const displayQuantityList = (productId) => {
     const selectedOption = dropdownList.options[dropdownList.selectedIndex];
     const selectedValue = Number(selectedOption.value);
     updateCart(productId, selectedValue);
-    drawCheckoutItems();
-    updateQuantityInCart();
+
+    drawUI();
     handleDeleteButton();
     handleDeliveryChange();
-    setCheckoutCartQuantity();
-    createOrderSummary();
   });
 };
 
@@ -310,33 +293,32 @@ const generateRandomId = () => {
 
 const addCartToOrders = () => {
   const newOrder = {
-    order_placed: today.format("MMMM D"),
-    total_price_cents: orderTotalPrice,
+    order_placed: getTodayDate(),
+    total_price_cents: getTotalPrice(),
     order_id: generateRandomId(),
-    products: cart
+    products: cart,
   };
 
   addToOrders(newOrder);
 };
 
-
 const placeOrder = () => {
   document.querySelector('.js-place-order').addEventListener('click', () => {
     addCartToOrders();
     clearCart();
-    
-    drawCheckoutItems();
-    updateQuantityInCart();
-    setCheckoutCartQuantity();
-    createOrderSummary();
+    drawUI();
   });
 };
 
+const drawUI = () => {
+  drawCheckoutItems();
+  updateQuantityInCart();
+  setCheckoutCartQuantity();
+  createOrderSummary();
+};
+
 setFavicon();
-drawCheckoutItems();
-updateQuantityInCart();
+drawUI();
 handleDeleteButton();
 handleDeliveryChange();
-setCheckoutCartQuantity();
-createOrderSummary();
 placeOrder();

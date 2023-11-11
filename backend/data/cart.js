@@ -79,3 +79,9 @@ export const setCheckoutCartQuantity = () => {
   const html = `Checkout (<a class='return-to-home-link' href='main-page.html'>${getCartQuantity()} items</a>)`;
   document.querySelector('.js-cart-quantity').innerHTML = html;
 };
+
+export const updateCart = (productId, newQuantity) => {
+  const productIndex = cart.findIndex(item => item.product.id === productId);
+  cart[productIndex].quantity = newQuantity;
+  saveCartToStorage();
+};
