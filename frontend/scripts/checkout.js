@@ -268,7 +268,6 @@ const displayQuantityList = (productId) => {
   });
 };
 
-
 const updateQuantityInCart = () => {
   document.querySelectorAll('.js-update-quantity').forEach((button) => {
     button.addEventListener('click', () => {
@@ -276,7 +275,6 @@ const updateQuantityInCart = () => {
     });
   });
 };
-
 
 const generateRandomId = () => {
   let result = '';

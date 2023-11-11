@@ -71,7 +71,7 @@ export const deleteFromCart = (deleteId) => {
   setMainPageCartQuantity();
 };
 
-export const setMainPageCartQuantity = () => {
+export const setHeaderCartQuantity = () => {
   document.querySelector('.js-cart-quantity').innerHTML = getCartQuantity();
 };
 
