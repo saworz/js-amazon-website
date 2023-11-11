@@ -1,4 +1,4 @@
-import { addToCart, getCartQuantity, setHeaderCartQuantity } from "../../backend/data/cart.js";
+import { addToCart, setHeaderCartQuantity } from "../../backend/data/cart.js";
 import products from "../../backend/data/products.js";
 import convertCentsToDollars from "../../backend/utils/priceConverting.js";
 import setFavicon from "./favicon.js";

@@ -53,7 +53,7 @@ export const addToCart = (productId) => {
     });
   };
   saveCartToStorage();
-  setMainPageCartQuantity();
+  setHeaderCartQuantity();
 };
 
 export const deleteFromCart = (deleteId) => {
@@ -68,7 +68,7 @@ export const deleteFromCart = (deleteId) => {
 
   cart = newCart;
   saveCartToStorage();
-  setMainPageCartQuantity();
+  setHeaderCartQuantity();
 };
 
 export const setHeaderCartQuantity = () => {

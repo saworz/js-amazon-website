@@ -42,11 +42,8 @@ const getTrackedOrderHtml = (item) => {
   return html;
 };
 
-const drawTrackedOrder = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const itemId = urlParams.get('itemId');
+const getMatchingItem = (itemId) => {
   let item;
-
   orders.forEach((order) => {
     order.products.forEach((productObj) => {
       const product = productObj.product
@@ -54,9 +51,15 @@ const drawTrackedOrder = () => {
         item = productObj;
       };
     });
-    document.querySelector('.js-tracking').innerHTML = getTrackedOrderHtml(item);
   });
+  return item;
+};
 
+const drawTrackedOrder = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const itemId = urlParams.get('itemId');
+  const item = getMatchingItem(itemId);
+  document.querySelector('.js-tracking').innerHTML = getTrackedOrderHtml(item);
 };
 
 setFavicon();
