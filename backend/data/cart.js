@@ -5,11 +5,11 @@ if (!cart) {
   cart = [];
 };
 
-export function saveToStorage() {
+export const saveToStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cart));
 };
 
-export function addToCart(productId) {
+export const addToCart = (productId) => {
   let matchingItem;
 
   cart.forEach((item) => {
@@ -38,7 +38,7 @@ export function addToCart(productId) {
   calculateQuantity();
 };
 
-export function deleteFromCart(deleteId) {
+export const deleteFromCart = (deleteId) => {
   const newCart = [];
 
   cart.forEach((product) => {
@@ -52,7 +52,7 @@ export function deleteFromCart(deleteId) {
   saveToStorage();
 };
 
-export function calculateQuantity() {
+export const calculateQuantity = () => {
   let itemsQuantity = 0;
 
   cart.forEach((item) => {
@@ -60,4 +60,9 @@ export function calculateQuantity() {
   });
 
   document.querySelector('.js-cart-quantity').innerHTML = itemsQuantity;
-}
+};
+
+export const clearCart = () => {
+  cart = [];
+  saveToStorage();
+};

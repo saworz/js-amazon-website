@@ -8,7 +8,8 @@ const drawOrders = () => {
   let item;
 
   orders.forEach((order) => {
-    order.products.forEach((product) => {
+    order.products.forEach((productObj) => {
+      const product = productObj.product
       if (product.id === itemId) {
         item = product;
       };

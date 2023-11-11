@@ -1,4 +1,5 @@
-  import { cart, deleteFromCart, saveToStorage } from "../../backend/data/cart.js";
+import { cart, deleteFromCart, saveToStorage, clearCart } from "../../backend/data/cart.js";
+import { orders, addToOrders, saveOrdersToStorage } from "../../backend/data/ordersList.js"
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import setFavicon from "./favicon.js";
 
@@ -139,12 +140,13 @@ const handleDeleteButton = () => {
   });
 };
 
+let orderTotalPrice = 0;
 
 const createOrderSummary = (totalDeliveryPriceCents, totalItemsPriceCents) => {
   const beforeTaxCents = totalDeliveryPriceCents + totalItemsPriceCents;
   const taxValue = 0.1;
   const taxPrice = beforeTaxCents * taxValue;
-  const orderTotal = beforeTaxCents + taxPrice;
+  orderTotalPrice = beforeTaxCents + taxPrice;
   const html = `          
   <div class="payment-summary-title">
     Order Summary
@@ -172,7 +174,7 @@ const createOrderSummary = (totalDeliveryPriceCents, totalItemsPriceCents) => {
 
   <div class="payment-summary-row total-row">
     <div>Order total:</div>
-    <div class="payment-summary-money">$${(orderTotal/100).toFixed(2)}</div>
+    <div class="payment-summary-money">$${(orderTotalPrice/100).toFixed(2)}</div>
   </div>
 
   <button class="place-order-button button-primary js-place-order">
@@ -217,7 +219,7 @@ const setDeliveryDate = (productId, optionIndex) => {
       let delivery;
 
       if (optionIndex === 0) {
-        delivery = today.add(7, 'days').format('dddd, MMMM D')
+        delivery = today.add(7, 'days').format('dddd, D, MMMM')
       }
       else if (optionIndex === 1) {
         delivery = today.add(3, 'days').format('dddd, D, MMMM')
@@ -298,9 +300,40 @@ const updateQuantityInCart = () => {
 };
 
 
+const generateRandomId = () => {
+  let result = '';
+  let length = 30;
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
+};
+
+const addCartToOrders = () => {
+  const newOrder = {
+    order_placed: today.format("MMMM D"),
+    total_price_cents: orderTotalPrice,
+    order_id: generateRandomId(),
+    products: cart
+  };
+
+  addToOrders(newOrder);
+};
+
+
 const placeOrder = () => {
   document.querySelector('.js-place-order').addEventListener('click', () => {
-    console.log('clicked')
+    addCartToOrders();
+    clearCart();
+    
+    drawCheckoutItems();
+    updateQuantityInCart();
+    calculateQuantity();
+    summarizeOrderCost();
   });
 };
 
