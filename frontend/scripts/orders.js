@@ -76,10 +76,12 @@ const buyAgainButton = () => {
 
 const moveToTracking = () => {
   orders.forEach((order) => {
-    const trackButton = document.querySelector(`.js-track-button-${order.id}`);
-    trackButton.addEventListener('click', () => {
-      const trackingUrl = "tracking.html?itemId=" + order.id;
-      window.location.href = trackingUrl;
+    order.products.forEach((product) => {
+      const trackButton = document.querySelector(`.js-track-button-${product.id}`);
+      trackButton.addEventListener('click', () => {
+        const trackingUrl = "tracking.html?itemId=" + product.id;
+        window.location.href = trackingUrl;
+      });
     });
   });
 };
