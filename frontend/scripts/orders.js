@@ -93,10 +93,9 @@ const moveToTracking = () => {
   orders.forEach((order) => {
     order.products.forEach((productObj) => {
       const product = productObj.product;
-      const trackButton = document.querySelector(`.js-track-button-${product.id}`);
-      trackButton.addEventListener('click', () => {
+      document.querySelectorAll(`.js-track-button-${product.id}`).forEach((button) => {button.addEventListener('click', () => {
         const trackingUrl = "tracking.html?itemId=" + product.id;
-        window.location.href = trackingUrl;
+        window.location.href = trackingUrl;});
       });
     });
   });
