@@ -63,14 +63,7 @@ const handleAddButton = () => {
   });
 };
 
-const rolldownMenu = () => {
-  document.querySelector(".js-mobile-list-link").addEventListener('click', () => {
-    document.querySelector(".js-dropdown-content").classList.add("show");
-  });
-};
-
 setFavicon();
 drawItems();
-rolldownMenu();
 handleAddButton();
 setHeaderCartQuantity();
