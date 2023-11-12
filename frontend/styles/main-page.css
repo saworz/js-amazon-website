@@ -124,3 +124,32 @@
   cursor: pointer;
   background-color: rgb(212, 184, 16);;
 }
+
+.mobile-list-link {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: fixed;
+  top: 60px;
+  height: 100px;
+  width: 100%;
+  background-color: black;
+  z-index: 900;
+}
+
+.dropdown-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid white;
+  height: 50%;
+  color: white;
+
+}
+
+.show {
+  display: block;
+}
+
