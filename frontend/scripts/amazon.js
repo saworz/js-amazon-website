@@ -3,10 +3,13 @@ import products from "../../backend/data/products.js";
 import convertCentsToDollars from "../../backend/utils/priceConverting.js";
 import setFavicon from "./favicon.js";
 
+const getQueryString = () => {
+  return document.querySelector(".js-search-bar").value;
+};
 
-const drawItems = (queryString) => {
+const drawItems = () => {
   let filteredProducts = [];
-  const filterProducts = () => {
+  const filterProducts = (queryString) => {
     const containsString = (product) => {
       return product.name.toLowerCase().includes(queryString.toLowerCase());
     };
@@ -25,9 +28,10 @@ const drawItems = (queryString) => {
   
   let productsHTML = '';
   let productsToDraw;
+  const queryString = getQueryString();
 
   if (queryString) {
-    productsToDraw = filterProducts();
+    productsToDraw = filterProducts(queryString);
   } else {
     productsToDraw = products;
   };
@@ -90,25 +94,20 @@ const handleAddButton = () => {
 };
 
 const searchItems = () => {
-  const getQueryString = () => {
-    const query = document.querySelector(".js-search-bar");
-    return query.value;
-  };
-
   document.querySelector(".js-search-button").addEventListener("click", () => {
-    drawUI(getQueryString());
+    drawUI();
   });
 
   document.querySelector(".js-search-bar").addEventListener("keydown", (e) => {
     if (e.code == "Enter") {
-      drawUI(getQueryString());
+      drawUI();
     };
   });
 };
 
-const drawUI = (queryString) => {
+const drawUI = () => {
   setFavicon();
-  drawItems(queryString);
+  drawItems();
   searchItems();
   handleAddButton();
   setHeaderCartQuantity();
