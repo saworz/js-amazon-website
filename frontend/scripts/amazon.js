@@ -4,10 +4,36 @@ import convertCentsToDollars from "../../backend/utils/priceConverting.js";
 import setFavicon from "./favicon.js";
 
 
-const drawItems = () => {
-  let productsHTML = '';
+const drawItems = (queryString) => {
+  let filteredProducts = [];
+  const filterProducts = () => {
+    const containsString = (product) => {
+      return product.name.toLowerCase().includes(queryString.toLowerCase());
+    };
 
-  products.forEach((product) => {
+    const getFilteredProducts = () => {
+      
+      products.forEach(product => {
+        if (containsString(product)) {
+          filteredProducts.push(product);
+        };
+      });
+    };
+    getFilteredProducts();
+    return filteredProducts;
+  };
+  
+  let productsHTML = '';
+  let productsToDraw;
+
+  if (queryString) {
+    productsToDraw = filterProducts();
+  } else {
+    productsToDraw = products;
+  };
+  
+  
+  productsToDraw.forEach((product) => {
     const html = `<div class="item-container">
     <div class="item-image-div">
       <img src="${product.image}" class="item-image">
@@ -63,7 +89,29 @@ const handleAddButton = () => {
   });
 };
 
-setFavicon();
-drawItems();
-handleAddButton();
-setHeaderCartQuantity();
+const searchItems = () => {
+  const getQueryString = () => {
+    const query = document.querySelector(".js-search-bar");
+    return query.value;
+  };
+
+  document.querySelector(".js-search-button").addEventListener("click", () => {
+    drawUI(getQueryString());
+  });
+
+  document.querySelector(".js-search-bar").addEventListener("keydown", (e) => {
+    if (e.code == "Enter") {
+      drawUI(getQueryString());
+    };
+  });
+};
+
+const drawUI = (queryString) => {
+  setFavicon();
+  drawItems(queryString);
+  searchItems();
+  handleAddButton();
+  setHeaderCartQuantity();
+};
+
+drawUI();

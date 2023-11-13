@@ -35,3 +35,7 @@
   background-color: rgb(237, 253, 255);
   box-shadow: none;
 }
+
+.search-button {
+  cursor: pointer;
+}
