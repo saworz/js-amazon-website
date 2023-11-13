@@ -1,5 +1,5 @@
 export let cart = JSON.parse(localStorage.getItem('cart'));
-import { products } from "../../backend/data/products.js"
+import products from "../../backend/data/products.js"
 
 
 if (!cart) {
@@ -85,3 +85,5 @@ export const updateCart = (productId, newQuantity) => {
   cart[productIndex].quantity = newQuantity;
   saveCartToStorage();
 };
+
+export default cart;

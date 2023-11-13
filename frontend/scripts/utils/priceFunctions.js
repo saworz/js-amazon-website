@@ -1,5 +1,5 @@
-import { cart } from "../../../backend/data/cart.js";
 import deliveryOptions from "../../../backend/data/deliveryOptions.js";
+import cart from "../../../backend/data/cart.js";
 
 export const getDeliveryPrice = () => {
   let totalDeliveryPrice = 0;

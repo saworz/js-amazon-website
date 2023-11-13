@@ -1,10 +1,11 @@
+import convertCentsToDollars from "../../backend/utils/priceConverting.js";
+import setFavicon from "./favicon.js";
+
 import { cart, deleteFromCart, updateCart, clearCart, getCartQuantity, setCheckoutCartQuantity } from "../../backend/data/cart.js";
 import { addToOrders } from "../../backend/data/ordersList.js"
-import convertCentsToDollars from "../../backend/utils/priceConverting.js";
 import { deliveryOptions } from "../../backend/data/deliveryOptions.js";
 import { addDays, getTodayDate } from "../../backend/utils/formatDate.js";
 import { getBeforeTaxPrice, getItemsPrice, getTaxPrice, getTotalPrice, getDeliveryPrice } from "../../backend/utils/priceFunctions.js";
-import setFavicon from "./favicon.js";
 
 
 const emptyCartInfo = () => {

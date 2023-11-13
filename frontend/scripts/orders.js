@@ -1,6 +1,8 @@
 import orders from "../../backend/data/ordersList.js";
-import { addToCart, setHeaderCartQuantity } from "../../backend/data/cart.js";
 import setFavicon from "./favicon.js";
+
+import { addToCart, setHeaderCartQuantity } from "../../backend/data/cart.js";
+
 
 const createSingleOrder = (order) => {
   const createOrderHeader = () => {
