@@ -3,9 +3,6 @@ import products from "../../backend/data/products.js";
 import convertCentsToDollars from "../../backend/utils/priceConverting.js";
 import setFavicon from "./favicon.js";
 
-const getQueryString = () => {
-  return document.querySelector(".js-search-bar").value;
-};
 
 const drawItems = () => {
   let filteredProducts = [];
@@ -28,6 +25,11 @@ const drawItems = () => {
   
   let productsHTML = '';
   let productsToDraw;
+
+  const getQueryString = () => {
+    return document.querySelector(".js-search-bar").value;
+  };
+
   const queryString = getQueryString();
 
   if (queryString) {
