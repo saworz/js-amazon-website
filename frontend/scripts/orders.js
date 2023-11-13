@@ -23,7 +23,6 @@ const createSingleOrder = (order) => {
   };
 
   const getOrderProducts = (productObj) => {
-    console.log(productObj)
     const product = productObj.product
     const productsSingleHtml = `   
     <div class="orders">       
