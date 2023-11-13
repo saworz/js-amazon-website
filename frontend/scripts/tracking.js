@@ -10,7 +10,7 @@ const drawTrackedOrder = () => {
       </a>
   
       <div class="delivery-date">
-        Arriving on ${item.arrival}
+        Arriving on ${item.product.arrival}
       </div>
   
       <div class="product-info">

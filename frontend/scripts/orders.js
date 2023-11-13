@@ -16,13 +16,14 @@ const createSingleOrder = (order) => {
       </div>
       <div class="order-id">
         <span class="order-upper-text">Order ID:</span>
-        <div class="order-lower-text">${order.order_id}</div>
+        <div class="order-lower-text-id">${order.order_id}</div>
       </div>
     </div>`;
     return orderInfoHtml;
   };
 
   const getOrderProducts = (productObj) => {
+    console.log(productObj)
     const product = productObj.product
     const productsSingleHtml = `   
     <div class="orders">       
@@ -35,7 +36,7 @@ const createSingleOrder = (order) => {
             ${product.name}
           </div>
           <div class="description-arrival">
-            Arriving on: ${productObj.arrival}
+            Arriving on: ${productObj.product.arrival}
           </div>
           <div class="description-quantity">
             Quantity: ${productObj.quantity}

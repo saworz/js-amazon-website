@@ -47,7 +47,7 @@
   flex-direction: column;
   justify-content: center;
   margin-left: auto;
-  margin-right: 20px;
+  margin-right: auto;
 }
 
 .orders {
@@ -76,6 +76,30 @@
 .order-image {
   max-width: 110px;
   max-height: 110px;
+}
+
+.order-lower-text {
+  width: 100%;
+  padding-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .order-lower-text-id {
+    width: 200px;
+    word-wrap: break-word; 
+  }
+
+  .order-id {
+    margin-left: 0px;
+  }
+
+  .order-total {
+    margin-right: 5px;
+  }
+
+  .order-placed {
+    margin-right: 20px;
+  }
 }
 
 .description-title {

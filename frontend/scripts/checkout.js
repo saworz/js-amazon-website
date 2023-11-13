@@ -171,18 +171,20 @@ const createOrderSummary = () => {
     Place your order
   </button>`
 
-  document.querySelector('.js-payment-summary').innerHTML = html
+  document.querySelector('.js-payment-summary').innerHTML = html;
+  placeOrder();
 };
 
 const handleDeliveryChange = () => {
-  const setDeliveryDate = (productId, optionIndex) => {
+  const setDeliveryDate = (product, optionIndex) => {
     const getDeliveryDays = (optionIndex) => {
       return deliveryOptions[optionIndex].days;
     };
-
+    
     document.querySelectorAll('.js-delivery-date').forEach((date) => {
-      if (date.dataset.productId === productId) {
-        const deliveryDays = getDeliveryDays(optionIndex);
+      if (date.dataset.productId === product.id) {
+        const deliveryDays = getDeliveryDays(optionIndex);     
+        product.arrival = addDays(deliveryDays);
         date.innerHTML = `Delivery date: ${addDays(deliveryDays)}`;
       };
     });
@@ -190,10 +192,10 @@ const handleDeliveryChange = () => {
 
   cart.forEach((item) => {
     document.querySelectorAll('input[name="delivery-option-' + item.product.id + '"]').forEach((option, index) => {
-      setDeliveryDate(item.product.id, 1);
+      setDeliveryDate(item.product, 1);
 
       option.addEventListener('change', () => {
-        setDeliveryDate(item.product.id, index);
+        setDeliveryDate(item.product, index);
         createOrderSummary();
       });
     });
@@ -277,11 +279,7 @@ const drawUI = () => {
   createOrderSummary();
   handleDeleteButton();
   handleDeliveryChange();
-  placeOrder();
 };
 
 setFavicon();
 drawUI();
-handleDeleteButton();
-handleDeliveryChange();
-placeOrder();
