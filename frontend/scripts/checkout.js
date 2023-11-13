@@ -131,6 +131,7 @@ const handleDeleteButton = () => {
       const productId = button.dataset.productId;
       deleteFromCart(productId);
       clearItemContainer(productId);
+      placeOrder();
     });
   });
 };
@@ -274,6 +275,9 @@ const drawUI = () => {
   updateQuantityInCart();
   setCheckoutCartQuantity();
   createOrderSummary();
+  handleDeleteButton();
+  handleDeliveryChange();
+  placeOrder();
 };
 
 setFavicon();
