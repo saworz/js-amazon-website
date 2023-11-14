@@ -3,4 +3,4 @@
 
 ![Alt text](main-page-screenshot.png)
 
-Javascript functions allow user to interact with website by adding new items to cart, modifying amount if items, deleting them, reviewing items in checkout, finalizing order, checking previously made orders and tracking ordered items.
+Javascript functions allow user to interact with website by adding new items to cart, modifying amount of items, deleting them, reviewing items in checkout, finalizing order, checking previously made orders and tracking ordered items.

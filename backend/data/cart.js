@@ -68,7 +68,7 @@ export const deleteFromCart = (deleteId) => {
 
   cart = newCart;
   saveCartToStorage();
-  setHeaderCartQuantity();
+  setCheckoutCartQuantity();
 };
 
 export const setHeaderCartQuantity = () => {
